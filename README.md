@@ -49,3 +49,16 @@ TypeError: undefined is not an object (evaluating 't.type')
       at html (/Volumes/n_1024a-Projects/Repositories/__repros/satori-html-bun/node_modules/satori-html/dist/index.js:68:5)
       at /Volumes/n_1024a-Projects/Repositories/__repros/satori-html-bun/index.ts:3:16
 ```
+
+# Investigations
+
+```
+bun test-2.ts
+```
+
+Narrowing to this culprit:
+
+```ts
+import inlineCSS from "ultrahtml/transformers/inline";
+const inliner = inlineCSS({ useObjectSyntax: true });
+```
